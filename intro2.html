@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Task: Declare a function printName that takes a name parameter and prints the value of the name parameter.
+
+        function printName(name) {
+            console.log(name);
+        }
+
+        // Example Invocation:
+        printName("John"); // Expected Output: John
+
+
+        // Task: Declare a function printDynamicType that takes a value parameter and prints the type of the value parameter.
+
+        function printDynamicType(value) {
+            console.log(typeof value);
+        }
+
+        // Example Invocation:
+        printDynamicType(10); // Expected Output: number
+        printDynamicType("Hello"); // Expected Output: string
+
+        // Task: Declare a function printDataType that takes a value parameter and prints its data type.
+
+        function printDataType(value) {
+            console.log(typeof value);
+        }
+
+        // Example Invocation:
+        printDataType("Hello"); // Expected Output: string
+        printDataType(10); // Expected Output: number
+        printDataType(true); // Expected Output: boolean
+        printDataType([1, 2, 3]); // Expected Output: object (arrays are of type object)
+        printDataType({ key: "value" }); // Expected Output: object
+        printDataType(null); // Expected Output: object (this is a quirk in JavaScript)
+        printDataType(undefined); // Expected Output: undefined
+
+        // Task: Declare a function printNullableType that takes a value parameter. If the value is null, it should print "null". If the value is undefined, it should print "undefined". Otherwise, it should print the type of the value.
+
+        function printNullableType(value) {
+            if (value === null) {
+                console.log("null");
+            } else if (value === undefined) {
+                console.log("undefined");
+            } else {
+                console.log(typeof value);
+            }
+        }
+
+        // Example Invocation:
+        printNullableType(null); // Expected Output: null
+        printNullableType(undefined); // Expected Output: undefined
+        printNullableType("Hello"); // Expected Output: string
+        printNullableType(10); // Expected Output: number
+
+        // Task: Declare a function checkTruthy that takes a value parameter and checks if it's truthy or falsey. Print the result.
+
+        function checkTruthy(value) {
+            console.log(!!value);
+        }
+
+        // Example Invocation:
+        checkTruthy(""); // Expected Output: false
+        checkTruthy(0); // Expected Output: false
+        checkTruthy(null); // Expected Output: false
+        checkTruthy(undefined); // Expected Output: false
+        checkTruthy("Hello"); // Expected Output: true
+        checkTruthy(10); // Expected Output: true
+        checkTruthy({}); // Expected Output: true
+
+
+        // Task: Declare a function generateMessage that takes name, age, and language parameters and generates a message using template literals.
+
+        function generateMessage(name, age, language) {
+            return My name is ${name}, I am ${age} years old, and my favorite programming language is ${language}.;
+        }
+
+        // Example Invocation:
+        console.log(generateMessage("John", 25, "JavaScript")); // Expected Output: My name is John, I am 25 years old, and my favorite programming language is JavaScript.
+
+    </script>
+</body>
+
+</html>
