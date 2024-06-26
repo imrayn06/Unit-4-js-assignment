@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const products = [
+            { name: "Laptop", category: "Electronics", price: 1200, quantity: 10, available: true },
+            { name: "Chair", category: "Furniture", price: 100, quantity: 20, available: true },
+            { name: "Shirt", category: "Clothing", price: 30, quantity: 50, available: false },
+            { name: "Book", category: "Books", price: 20, quantity: 100, available: true }
+        ];
+
+        // Filtering function
+        function filterProducts(products, criteria) {
+            return products.filter(product => {
+                for (let key in criteria) {
+                    if (product[key] !== criteria[key]) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+        }
+
+        // Sorting function
+        function sortProducts(products, key, ascending = true) {
+            return products.slice().sort((a, b) => {
+                if (a[key] < b[key]) return ascending ? -1 : 1;
+                if (a[key] > b[key]) return ascending ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Transform function to add total value
+        function addTotalValue(products) {
+            return products.map(product => ({
+                ...product,
+                totalValue: product.price * product.quantity
+            }));
+        }
+
+        // Generate inventory report
+        function generateReport(products) {
+            const totalProducts = products.length;
+            const totalValue = products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+            const avgPrice = products.reduce((sum, product) => sum + product.price, 0) / totalProducts;
+
+            const categoryDistribution = products.reduce((acc, product) => {
+                acc[product.category] = (acc[product.category] || 0) + 1;
+                return acc;
+            }, {});
+
+            return {
+                totalProducts,
+                totalValue,
+                avgPrice,
+                categoryDistribution
+            };
+        }
+
+        // Usage Examples
+
+        // Filtering products
+        const filteredProducts = filterProducts(products, { available: true });
+        console.log("Filtered Products:", filteredProducts);
+
+        // Sorting products by price
+        const sortedProductsByPrice = sortProducts(products, 'price');
+        console.log("Sorted Products by Price:", sortedProductsByPrice);
+
+        // Adding total value to each product
+        const productsWithTotalValue = addTotalValue(products);
+        console.log("Products with Total Value:", productsWithTotalValue);
+
+        // Generating inventory report
+        const inventoryReport = generateReport(products);
+        console.log("Inventory Report:", inventoryReport);
+
+    </script>
+</body>
+
+</html>
