@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function calculateTotalExpenses(expenses) {
+            return expenses.reduce((total, item) => total + item.amount, 0);
+        }
+
+        // Example Input
+        const expenses = [
+            { name: "Food", amount: 50 },
+            { name: "Transportation", amount: 30 },
+            { name: "Internet", amount: 45 },
+            { name: "Groceries", amount: 80 }
+        ];
+
+        // Calculate and Output the Total Expenses
+        const totalExpenses = calculateTotalExpenses(expenses);
+        console.log(totalExpenses);
+    </script>
+</body>
+
+</html>
