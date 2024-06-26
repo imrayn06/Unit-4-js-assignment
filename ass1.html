@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function subtract(num1, num2) {
+            if (typeof num1 === 'number' && typeof num2 === 'number') {
+                return num1 - num2;
+            } else {
+                return 'Both parameters must be numbers.';
+            }
+        }
+
+        // Example Invocation
+        console.log(subtract(10, 5)); // Expected Output: 5
+
+        function greet(firstName, lastName, age) {
+            if (age !== undefined) {
+                return ${firstName} ${lastName}'s age is ${age}.;
+            } else {
+                return ${firstName} ${lastName}'s age is not available.;
+            }
+        }
+
+        // Example Invocation
+        console.log(greet("John", "Doe", 30)); // Expected Output: "John Doe's age is 30."
+        console.log(greet("John", "Doe")); // Expected Output: "John Doe's age is not available."
+
+        function interpolate(num1, num2) {
+            if (typeof num1 === 'number' && typeof num2 === 'number') {
+                const sum = num1 + num2;
+                return ${num1} + ${num2} = ${sum};
+            } else {
+                return 'Both parameters must be numbers.';
+            }
+        }
+
+        // Example Invocation
+        console.log(interpolate(5, 3)); // Expected Output: "5 + 3 = 8"
+        console.log(interpolate(5, "3")); // Expected Output: "Both parameters must be numbers."
+
+    </script>
+</body>
+
+</html>
