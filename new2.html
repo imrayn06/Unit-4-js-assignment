@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function objectFactory(fname, age) {
+            return { [fname]: Number(age) };
+        }
+
+        // Example Invocation
+        console.log(objectFactory("John", "25")); // Expected Output: { John: 25 }
+
+        function gradeClassifier(score) {
+            if (typeof score !== 'number' || score < 0 || score > 100) {
+                return "Invalid score";
+            }
+
+            if (score >= 90) {
+                return "A";
+            } else if (score >= 80) {
+                return "B";
+            } else if (score >= 70) {
+                return "C";
+            } else if (score >= 60) {
+                return "D";
+            } else {
+                return "F";
+            }
+        }
+
+        // Example Invocation
+        console.log(gradeClassifier(85)); // Expected Output: "B"
+        console.log(gradeClassifier(105)); // Expected Output: "Invalid score"
+
+        function stringManipulator(str1, str2) {
+            if (typeof str1 !== 'string' || typeof str2 !== 'string') {
+                return "Both inputs must be strings.";
+            }
+
+            if (str1.length === str2.length) {
+                return str1 + str2;
+            } else if (str1.length > str2.length) {
+                return str1 + str2;
+            } else {
+                return str2 + str1;
+            }
+        }
+
+        // Example Invocation
+        console.log(stringManipulator("hello", "world")); // Expected Output: "helloworld"
+        console.log(stringManipulator("hi", "there")); // Expected Output: "therehi"
+        console.log(stringManipulator("", "hello")); // Expected Output: "hello"
+        console.log(stringManipulator("hello", "")); // Expected Output: "hello"
+
+    </script>
+</body>
+
+</html>
