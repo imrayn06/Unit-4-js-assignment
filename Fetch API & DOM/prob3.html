@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: aliceblue;
+        }
+        .card {
+            border: 1px solid;
+            border-radius: 10px;
+            padding-left: 20px;
+            background-color: white;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+<script>
+    let container = document.querySelector("#container");
+    let url = "https://jsonplaceholder.typicode.com/todos";
+
+    let displayInDom = async (URL) => {
+        let data = await fetchData(URL);
+        data.forEach((ele) => {
+            let card = document.createElement("div");
+            card.className = "card";
+            let title = document.createElement("h3");
+            title.innerHTML = <b>Title: </b>${ele.title};
+            let status = document.createElement("p");
+            status.innerHTML = <b>Completed: </b>${ele.completed};
+            card.append(title, status);
+            container.append(card);
+        });
+    }
+
+    let fetchData = async (URL) => {
+        let initialData = await fetch(URL);
+        let finalData = await initialData.json();
+        return finalData;
+    }
+
+    displayInDom(url);
+</script>
+</html>
