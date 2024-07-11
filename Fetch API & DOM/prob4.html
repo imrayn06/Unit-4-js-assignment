@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 70%;
+            margin: auto;
+        }
+        .card {
+            border: 1px solid;
+            border-radius: 10px;
+        }
+        img {
+            width: 100%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Click the button below to show all data</h2>
+    <button id="fetchdata">Fetch</button>
+    <div id="container"></div>
+</body>
+<script>
+    let fetchdata = document.querySelector("#fetchdata");
+    let container = document.querySelector("#container");
+    let data = "https://dummyjson.com/users";
+    
+    let flag = true;
+    fetchdata.addEventListener("click", () => {
+        if (flag) {
+            showData(data);
+            flag = false;
+        } else {
+            container.innerHTML = "";
+            flag = true;
+        }
+    });
+
+    let showData = async (sampleData) => {
+        let dataForShowData = await fetchingData(sampleData);
+        console.log(dataForShowData);
+        dataForShowData.forEach((ele) => {
+            let card = document.createElement("div");
+            card.className = "card";
+            let name = document.createElement("p");
+            name.innerHTML = <b>NAME:</b> ${ele.firstName} ${ele.lastName};
+            let phoneNo = document.createElement("p");
+            phoneNo.innerHTML = <b>Ph No:</b> ${ele.phone};
+            let email = document.createElement("p");
+            email.innerHTML = <b>Email:</b> ${ele.email};
+            let image = document.createElement("img");
+            image.src = ele.image;
+            card.append(image, name, phoneNo, email);
+            container.append(card);
+        });
+    }
+
+    let fetchingData = async (sample) => {
+        let fetchData = await fetch(sample);
+        let finalData = await fetchData.json();
+        return finalData.users;
+    }
+</script>
+</html>
