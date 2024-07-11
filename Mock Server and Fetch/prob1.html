@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Open Sans", sans-serif;
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+      background-color: #b6ecec;
+    }
+
+    #container {
+      max-width: 1240px;
+      margin: auto;
+    }
+
+    #content {
+      max-width: 370px;
+      min-width: 340px;
+      margin: auto;
+      box-sizing: border-box;
+      padding: 25px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      border-radius: 10px;
+    }
+
+    #content>div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #content>div:nth-of-type(2) {
+      margin-top: 20px;
+    }
+
+    #content>div:nth-of-type(3) {
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #container label {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+
+    #container button {
+      padding: 10px 125px;
+      border-radius: 10px;
+      border: none;
+      background-color: yellow;
+      color: black;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    #container input {
+      height: 35px;
+      width: 200px;
+      border-radius: 10px;
+      border: none;
+      margin-left: 10px;
+    }
+
+    #container input::placeholder {
+      padding-left: 5px;
+      color: black;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="container">
+    <form>
+      <div id="content">
+        <div>
+          <label for="username">User Name <span style="color: red;">*</span></label>
+          <input id="username" type="text" placeholder="username" required>
+        </div>
+        <div>
+          <label for="password">Password <span style="color: red;">*</span></label>
+          <input id="password" type="password" placeholder="password" required>
+        </div>
+        <div>
+          <button type="submit" id="login">Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+<script>
+
+  let URL = 'http://localhost:3000/users'
+
+
+  let fetched = async (URL)=>{
+   try {
+     let response = await fetch(URL)
+     let data = await response.json()
+     return data
+   } catch (error) {
+    return (error)
+   }
+  }
+
+let handleLogin = async (event)=>{
+  event.preventDefault()
+  let username = document.getElementById("username").value
+  let password = document.getElementById("password").value
+  if (username && password){
+    let ndata = await fetched(URL)
+    let nndata = ndata.find((ele)=>{
+      return ele.username===username && ele.password === password;
+    })
+    if (nndata){
+      alert("Login Sucessfully")
+    }else{
+      alert("Please Use valid Credential")
+    }
+  }
+}
+
+  let loginbtn = document.getElementById("login")
+  loginbtn.addEventListener("click",(event)=>handleLogin(event))
+</script>
+
+</html>
