@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <button id="get-category-data">Get Category Data</button>
+        <button id="get-ingredient-data">Get Ingredient Data</button>
+    </div>
+    
+</body>
+<script>
+    let category=document.querySelector("#get-category-data")
+    let Ingredient=document.querySelector("#get-ingredient-data")
+
+    let categorydata="https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
+    let Ingredientdate="https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast"
+    
+    category.addEventListener("click", async()=>{
+        let ans= await fetchdata(categorydata)
+        console.log(ans)
+    })
+    Ingredient.addEventListener("click",async ()=>{
+        let ans= await fetchdata(Ingredientdate)
+        console.log(ans)
+    })
+
+    let fetchdata= async(url)=>{
+        try {
+            let fetchurl = await fetch(url)
+            let readyurl=await fetchurl.json()
+            return readyurl.meals
+            
+        } catch (error) {
+            console.log("something went wrong.")
+        }
+        
+    }
+    
+</script>
+</html>
