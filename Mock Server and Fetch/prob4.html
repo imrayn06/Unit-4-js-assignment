@@ -1,0 +1,87 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const loginButton = document.getElementById("loginButton");
+  const fetchTodosButton = document.getElementById("fetchTodosButton");
+  const notification = document.getElementById("notification");
+  const todoList = document.getElementById("todoList");
+  const todosSection = document.getElementById("todosSection");
+  const logoutBtn = document.getElementById("logout_btn");
+
+  let userAuthToken = localStorage.getItem("localAccessToken");
+  let userId = localStorage.getItem("userId");
+
+  const checkLoginStatus = () => {
+    if (userAuthToken && userId) {
+      const username = localStorage.getItem("username");
+      notification.textContent = Hey ${username}, welcome back!;
+      todosSection.style.display = "block";
+      document.getElementById("login").style.display = "none";
+    }
+  };
+
+  checkLoginStatus();
+
+  loginButton.addEventListener("click", () => {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (username && password) {
+      userAuthToken = Date.now().toString();
+      userId = Date.now().toString();
+      localStorage.setItem("localAccessToken", userAuthToken);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("username", username);
+      notification.textContent = Hey ${username}, welcome back!;
+      todosSection.style.display = "block";
+      document.getElementById("login").style.display = "none";
+    } else {
+      notification.textContent = "Please enter a username and password!";
+    }
+  });
+
+  let flag = true;
+
+  fetchTodosButton.addEventListener("click", () => {
+    if (flag) {
+      const todos = JSON.parse(localStorage.getItem("todos")) || [
+        { id: 1, title: "Learn HTML", completed: false },
+        { id: 2, title: "Learn CSS", completed: false },
+        { id: 3, title: "Learn JavaScript", completed: true },
+        { id: 4, title: "Learn React", completed: true },
+        { id: 5, title: "Learn Pyhton", completed: true },
+        { id: 6, title: "Learn MongoDb", completed: true },
+      ];
+      displayTodos(todos);
+      flag = false;
+    } else {
+      todoList.innerHTML = "";
+      flag = true;
+    }
+  });
+
+  logout_btn.addEventListener("click", () => {
+    document.getElementById("todosSection").style.display = "none";
+    document.getElementById("login").style.display = "block";
+  });
+
+  const displayTodos = (todos) => {
+    todoList.innerHTML = "";
+    todos.forEach((todo) => {
+      const todoItem = document.createElement("li");
+      todoItem.className = "todo-item";
+      todoItem.innerHTML = `
+              <input type="checkbox" id="todo-${todo.id}" ${
+        todo.completed ? "checked" : ""
+      }>
+              <label for="todo-${todo.id}">${todo.title}</label>
+          `;
+      todoList.appendChild(todoItem);
+
+      document
+        .getElementById(todo-${todo.id})
+        .addEventListener("change", () => {
+          todo.completed = !todo.completed;
+          localStorage.setItem("todos", JSON.stringify(todos));
+        });
+    });
+  };
+});
